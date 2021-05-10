@@ -38,15 +38,16 @@ func LoginController(w http.ResponseWriter, r *http.Request) {
 		}
 		json.NewEncoder(w).Encode(result)
 		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(200)
+		w.WriteHeader(http.StatusAccepted)
 	} else {
 		json.NewEncoder(w).Encode("Unauthorized")
-		w.WriteHeader(500)
+		w.WriteHeader(http.StatusUnauthorized)
 	}
 }
 
 func MeController(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Claims info")
+	bearerToken := r.Header.Get("Authorization")
+	extractClaims(bearerToken)
 }
 
 func GetLInkController(w http.ResponseWriter, r *http.Request) {

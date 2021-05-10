@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/dgrijalva/jwt-go"
 	"github.com/joho/godotenv"
 )
 
@@ -26,9 +27,21 @@ func LoginController(w http.ResponseWriter, r *http.Request) {
 	userTest := os.Getenv("USER_TEST")
 	userPasswordTest := os.Getenv("USER_PASSWORD_TEST")
 	if user.Email == userTest && user.Password == userPasswordTest {
-		fmt.Println("Logged in!")
+		token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+			"email":       user.Email,
+			"secret_word": "nomada",
+		})
+		mySecret := []byte(os.Getenv("JWT_TOKEN"))
+		result, err := token.SignedString(mySecret)
+		if err != nil {
+			log.Fatal(err)
+		}
+		json.NewEncoder(w).Encode(result)
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(200)
 	} else {
-		fmt.Println("Unauthorized!")
+		json.NewEncoder(w).Encode("Unauthorized")
+		w.WriteHeader(500)
 	}
 }
 

@@ -5,9 +5,11 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"strings"
 
 	"github.com/dgrijalva/jwt-go"
+	"github.com/joho/godotenv"
 )
 
 func JWTmiddleware(next http.Handler) http.Handler {
@@ -39,23 +41,26 @@ func JWTmiddleware(next http.Handler) http.Handler {
 	})
 }
 
-func ClaimsMiddleware(tokenStr string) (jwt.MapClaims, bool) {
-	hmacSecretString := "498e5outdrjijovlo5eijrnlioj"
+func ClaimsMiddleware(tokenStr string) jwt.MapClaims {
+	errDotEnv := godotenv.Load()
+	if errDotEnv != nil {
+		log.Fatal("Error loading .env file")
+	}
+	hmacSecretString := os.Getenv("JWT_TOKEN")
 	hmacSecret := []byte(hmacSecretString)
-	token, err := jwt.Parse(tokenStr, func(token *jwt.Token) (interface{}, error) {
+	jwtString := strings.Split(tokenStr, "Bearer ")[1]
+	token, err := jwt.Parse(jwtString, func(token *jwt.Token) (interface{}, error) {
 		// check token signing method etc
 		return hmacSecret, nil
 	})
+	log.Println("", err)
 
 	if err != nil {
-		return nil, false
+		return nil
 	}
-
 	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
-		fmt.Println(claims)
-		return claims, true
+		return claims
 	} else {
-		log.Printf("Invalid JWT Token")
-		return nil, false
+		return nil
 	}
 }

@@ -3,7 +3,9 @@ package routes
 import (
 	"net/http"
 
-	handlers "github.com/91diego/api-rest-challenge/Handlers"
+	get_link_handler "github.com/91diego/api-rest-challenge/Handlers/GetLink"
+	login_handler "github.com/91diego/api-rest-challenge/Handlers/Login"
+	me_handler "github.com/91diego/api-rest-challenge/Handlers/Me"
 	middleware "github.com/91diego/api-rest-challenge/Middleware"
 
 	"github.com/gorilla/mux"
@@ -44,18 +46,18 @@ var routes = Routes{
 		"Login",
 		"POST",
 		"/login",
-		handlers.LoginHandler,
+		login_handler.LoginHandler,
 	},
 	Route{
 		"me",
 		"GET",
 		"/me",
-		handlers.MeHandler,
+		me_handler.MeHandler,
 	},
 	Route{
 		"get-links",
 		"POST",
 		"/get-links",
-		handlers.GetLInkHandler,
+		get_link_handler.GetLInkHandler,
 	},
 }

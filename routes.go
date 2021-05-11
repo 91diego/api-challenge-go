@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github/91diego/api-challenge-go/src/middleware/jwtMiddleware"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -29,7 +30,7 @@ func NewRouter() *mux.Router {
 			router.Methods(route.Method).
 				Path(route.Pattern).
 				Name(route.Name).
-				Handler(JWTmiddleware(route.HandleFunc))
+				Handler(jwtMiddleware.JWTmiddleware(route.HandleFunc))
 		}
 	}
 

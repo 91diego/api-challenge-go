@@ -25,7 +25,7 @@ func NewRouter() *mux.Router {
 	router := mux.NewRouter().StrictSlash(true)
 
 	for _, route := range routes {
-		if route.Name == "Login" {
+		if route.Name == "login" {
 			router.Methods(route.Method).
 				Path(route.Pattern).
 				Name(route.Name).
@@ -43,7 +43,7 @@ func NewRouter() *mux.Router {
 
 var routes = Routes{
 	Route{
-		"Login",
+		"login",
 		"POST",
 		"/login",
 		login_handler.LoginHandler,

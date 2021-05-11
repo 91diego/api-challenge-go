@@ -1,5 +1,5 @@
 FORMAT: 1A
-HOST: http://localhost:8080/api
+HOST: http://127.0.0.1:8000/api
 
 # API Rest Challenge
 
@@ -71,7 +71,7 @@ Get user method
 
     + Headers
 
-            Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYyMDUwNzU3OSwiZXhwIjoxNjIwNTExMTc5LCJuYmYiOjE2MjA1MDc1NzksImp0aSI6IjloVGRURlBSeUludU9xbXgiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjciLCJlbWFpbCI6ImRlbW9AdXN1YXJpby5jb20iLCJzZWNyZXRfd29yZCI6Im5vbWFkYSJ9.-lg4Xq5S_KKiMVtI12R0UIgbFNKwn5EKzf53PbsogP0
+            Bearer: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRlbW9AdXN1YXJpby5jb20iLCJzZWNyZXRfd29yZCI6Im5vbWFkYSJ9.JdbWoYoGLOZP7i6ao5q5AiMVbzXGjpOkOeVWOmewT3o
 
 + Response 200 (application/json)
 
@@ -86,6 +86,38 @@ Get user method
                         "email": "demo@usuario.com",
                         "secret_word": "nomada"
                     }
+                }
+    
++ Response 400 (application/json)
+
+    + Body
+
+                {
+                    "status": "Token is Invalid"
+                }
+
+
+## Url Collection [/get-links]
+
+### Get url Collection [GET]
+
+Get url elements
+
++ Request (application/json)
+
+    + Headers
+
+            Bearer: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRlbW9AdXN1YXJpby5jb20iLCJzZWNyZXRfd29yZCI6Im5vbWFkYSJ9.JdbWoYoGLOZP7i6ao5q5AiMVbzXGjpOkOeVWOmewT3o
+
++ Response 200 (application/json)
+
+
+    + Body
+
+                {
+                    "code":200,
+                    "status":"success",
+                    "message":"XSLX Downloaded!"
                 }
     
 + Response 400 (application/json)

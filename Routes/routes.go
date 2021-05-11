@@ -54,7 +54,7 @@ var routes = Routes{
 	},
 	Route{
 		"get-links",
-		"GET",
+		"POST",
 		"/get-links",
 		handlers.GetLInkHandler,
 	},

@@ -1,8 +1,10 @@
-package main
+package routes
 
 import (
-	"github/91diego/api-challenge-go/src/middleware/jwtMiddleware"
 	"net/http"
+
+	handlers "github.com/91diego/api-rest-challenge/Handlers"
+	middleware "github.com/91diego/api-rest-challenge/Middleware"
 
 	"github.com/gorilla/mux"
 )
@@ -30,7 +32,7 @@ func NewRouter() *mux.Router {
 			router.Methods(route.Method).
 				Path(route.Pattern).
 				Name(route.Name).
-				Handler(jwtMiddleware.JWTmiddleware(route.HandleFunc))
+				Handler(middleware.JWTmiddleware(route.HandleFunc))
 		}
 	}
 
@@ -42,18 +44,18 @@ var routes = Routes{
 		"Login",
 		"POST",
 		"/login",
-		LoginController,
+		handlers.LoginHandler,
 	},
 	Route{
 		"me",
 		"GET",
 		"/me",
-		MeController,
+		handlers.MeHandler,
 	},
 	Route{
 		"get-links",
 		"GET",
 		"/get-links",
-		GetLInkController,
+		handlers.GetLInkHandler,
 	},
 }

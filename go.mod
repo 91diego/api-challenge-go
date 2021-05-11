@@ -1,4 +1,4 @@
-module github/91diego/api-challenge-go
+module github.com/91diego/api-rest-challenge
 
 go 1.16
 

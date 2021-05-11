@@ -1,8 +1,7 @@
-package main
+package handlers
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -12,7 +11,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
-func LoginController(w http.ResponseWriter, r *http.Request) {
+func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	body := json.NewDecoder(r.Body)
 	var user models.User
 	err := body.Decode(&user)
@@ -44,13 +43,4 @@ func LoginController(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode("Unauthorized")
 		w.WriteHeader(http.StatusUnauthorized)
 	}
-}
-
-func MeController(w http.ResponseWriter, r *http.Request) {
-	bearerToken := r.Header.Get("Authorization")
-	extractClaims(bearerToken)
-}
-
-func GetLInkController(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Download file")
 }

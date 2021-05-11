@@ -44,12 +44,6 @@ your preferred browser.
 http://localhost:8080
 ```
 
-You can run unit testing with
-
-```sh
-php artisan test
-```
-
 ## License
 
 MIT

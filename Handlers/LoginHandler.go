@@ -36,11 +36,24 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			log.Fatal(err)
 		}
-		json.NewEncoder(w).Encode(result)
+		response := models.Response{
+			Code:    http.StatusAccepted,
+			Status:  "success",
+			Message: "Logged in successfully!",
+			Data:    result,
+		}
+		json.NewEncoder(w).Encode(response)
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusAccepted)
 	} else {
-		json.NewEncoder(w).Encode("Unauthorized")
+		response := models.Response{
+			Code:    http.StatusUnauthorized,
+			Status:  "error",
+			Message: "Unauthorized!",
+			Data:    "",
+		}
+		json.NewEncoder(w).Encode(response)
+		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusUnauthorized)
 	}
 }

@@ -34,7 +34,7 @@ cp .example.env .env
 Run server.
 
 ```sh
-run go *.go
+go run *.go
 ```
 
 Verify the deployment by navigating to your server address in

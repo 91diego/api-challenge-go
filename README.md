@@ -28,7 +28,7 @@ go mod vendor
 Create .env file.
 
 ```sh
-cp .env.example .env
+cp .example.env .env
 ```
 
 Run server.
